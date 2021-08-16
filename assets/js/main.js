@@ -51,11 +51,8 @@ registrar.addEventListener("click", async ()=>{
         //genero el modal de bootstrap para unos puntitos extras
         modal(contador)
 
-    }
-
-    
+    } 
 })
-
 // aca declaro la funcion limpiar, que simplemente devuelve todo al inicio, aunque funciona muy bien de la mano con la funcion para validar
 const limpiar = ()=>{
     nombre.value= "Seleccione un animal"
@@ -69,15 +66,35 @@ const pizarra = document.getElementById("Animales")
 const carta = (contador)=>{
     //lo vacio
     pizarra.innerHTML = ""
-    //lo lleno nuevamente con todos los que he creado hasta el momento, ademas de dar la conexion al Modal
     contador.forEach((element, index) => {
+        //esta parte tambien es buena, porque primero habia puesto todo con element.getSound(), pero mejor ocupo  el metodo de cada clase en especial
+        //lo repito tambien en la creacion del modal
+        var modificar = ""
+        switch(element.getName()){
+            case "Leon":
+                modificar = element.rugir()
+                break;
+            case "Aguila":
+                modificar = element.chillar()
+                break;
+            case "Oso":
+                modificar = element.gruñir() 
+                break;
+            case "Serpiente":
+                modificar = element.sisear()
+                break;
+            case "Lobo":
+                modificar = element.aullar()
+                break
+        } 
+        //lo lleno nuevamente con todos los que he creado hasta el momento, ademas de dar la conexion al Modal
             pizarra.innerHTML += `<div class="border border-white my-1 mx-2 card text-white bg-secondary">
                                     <img src="${element.getImg()}" style="width:10rem; cursor: cell"  class="card-img-top" alt="..." data-toggle="modal" data-target="#${element.getName()}${index}">
-                                        <div class="card-list p-1" style="cursor: pointer" onclick="reproducir('${element.getSound()}')">
+                                        <div class="card-list p-1" style="cursor: pointer" onclick="reproducir('${modificar}')">
                                         <span><img height="15rem" src="./assets/imgs/audio.svg"/></span>
                                         </div>
                                     </div>`
-    });
+    });   
 }
 //Esto me resulto necesario para reproducir los sonidos 
 window.reproducir = (rutaSonido) => {
@@ -97,6 +114,24 @@ const modal = (constante)=>{
     const divModal = document.getElementById("modal")
     divModal.innerHTML = ""
     constante.forEach((element, index)=>{
+        var modificar = ""
+        switch(element.getName()){
+            case "Leon":
+                modificar = element.rugir()
+                break;
+            case "Aguila":
+                modificar = element.chillar()
+                break;
+            case "Oso":
+                modificar = element.gruñir() 
+                break;
+            case "Serpiente":
+                modificar = element.sisear()
+                break;
+            case "Lobo":
+                modificar = element.aullar()
+                break
+        }
                 //creo un boton aparte del de cerrar el boton, para modificar el comentario actual, muy orgulloso de haberlo logrado
                 divModal.innerHTML += `<div class="modal bd-example-modal-sm text-white fade" id="${element.getName()}${index}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                             <div class="modal-dialog">
@@ -105,7 +140,12 @@ const modal = (constante)=>{
                                                         <h2 class="modal-title" id="staticBackdropLabel">${element.getName()} - Sujeto N°: ${index+1}</h2>
                                                     </div>
                                                     <div class="modal-body row">
-                                                    <div class="col-6 col-md-6"><img class="img-fluid" src="${element.getImg()}" alt=""></div>
+                                                    <div class="col-6 col-md-6">
+                                                    <img class="img-fluid" src="${element.getImg()}" alt="">
+                                                    <div class="card-list bg-secondary p-1" style="cursor: pointer" onclick="reproducir('${modificar}')">
+                                                    <span><img height="35rem" src="./assets/imgs/audio.svg"/></span>
+                                                    </div>
+                                                    </div>
                                                     
                                                     <div class="col-12 col-md-6 text-left">
                                                     <h5><u>Edad</u></h5>
@@ -134,9 +174,4 @@ const modal = (constante)=>{
                         modal(contador)
                 })
     })
-
 }
-//para que funcione el Modal de bootstrap 4.0
-$('#myModal').on('shown.bs.modal', function () {
-    $('#myInput').trigger('focus')
-})

@@ -13,19 +13,19 @@ class Animal {
         this.setComments = (newComment)=> _comments= newComment
         this.getComments = ()=> _comments
     }
-    get name(){
+    get _name(){
         return this.getName();
     }
-    get age(){
+    get _age(){
         return this.getAge();
     }
-    get img(){
+    get _img(){
         return this.getImg();
     }
-    get sound(){
+    get _sound(){
         return this.getSound();
     }
-    set comments(newComment){
+    set _comments(newComment){
         return this.setComments(newComment)
     }
 
@@ -36,7 +36,7 @@ class Aguila extends Animal {
         super(name, age, img, comments, sound)
     }
     chillar(){
-        this.getSound()
+        return this.getSound()
     }
 
 
@@ -46,7 +46,7 @@ class Leon extends Animal {
         super(name, age, img, comments, sound)
     }
     rugir(){
-        this.getSound()
+        return this.getSound()
     }
 
 
@@ -56,7 +56,7 @@ class Lobo extends Animal {
         super(name, age, img, comments, sound)
     }
     aullar(){
-        this.getSound()
+        return this.getSound()
     }
 
 
@@ -66,7 +66,7 @@ class Oso extends Animal {
         super(name, age, img, comments, sound)
     }
     gruñir(){
-        this.getSound()
+        return this.getSound()
     }
 
 
@@ -76,7 +76,7 @@ class Serpiente extends Animal {
         super(name, age, img, comments, sound)
     }
     sisear(){
-        this.getSound()
+        return this.getSound()
     }
 
 
